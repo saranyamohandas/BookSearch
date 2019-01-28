@@ -11,7 +11,7 @@ function Nav() {
       </div>
       <ul className="nav navbar-nav">
         <li className="active"></li>
-        <a href="/Users/omarcharlesgedeon/Desktop/12-Stu_GoogleBooksSearch/client/src/pages/Books.js" className="btn btn-warning" role="button">Search</a>
+        <a href="/Users/omarcharlesgedeon/Desktop/12-Stu_GoogleBooksSearch/client/src/pages/Books.js" className="btn btn-warning" role="button">Home</a>
         <a href="/Users/omarcharlesgedeon/Desktop/12-Stu_GoogleBooksSearch/client/src/pages/savedBooks.js" className="btn btn-warning" role="button">Saved</a>
       </ul>
       

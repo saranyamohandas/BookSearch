@@ -29,34 +29,13 @@ class Books extends Component {
         <Row>
           <Col size="md-12">
             <Jumbotron>
-              <strong><h1>Google Book Search</h1></strong>
+              <strong><h1>Poogle Book Search</h1></strong>
               <h5>-React Edition-</h5>
             </Jumbotron>
             
           </Col>
           <Col size="md-12 sm-1">
-          <form>
-              <h1>Book Search</h1>
-              <Input name="Book Search" placeholder="Title (required)" />
-              <FormBtn>Submit Book</FormBtn>
-            </form>
-            {this.state.books.length ? (
-              <List>
-                {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <a href={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
-                    </a>
-                    <DeleteBtn />
-                    <SaveBtn />
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3></h3>
-            )}
+            <h1>Book Search</h1> 
           </Col>
         </Row>
       </Container>
