@@ -3,33 +3,51 @@ import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
 import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
+import CardItem  from "../components/List";
 import { Input, FormBtn } from "../components/Form";
 import "../pages/books.css";
 
 class Books extends Component {
   state = {
     search: "",
-    books: []
+    books : []
   };
 
   handleInputChange = event => {
-    this.setState({search: event.target.value})
+    // console.log(event.target.value)
+    // console.log(this.state.search)
+    const name = event.target.name;
+    const value = event.target.value;
+    //this.setState({search: event.target.value})
+    this.setState({[name]: value});
+    console.log(this.state.search)
   }
 
   handleFormSubmit = event => {
     event.preventDefault();
+    //console.log("form submit",this.state.search)
+    //this.setState({search: event.target.value})
+    console.log("inside handleformsubmit")
     this.searchBooks(this.state.search);
+
   }
 
-  componentDidMount() {
-    this.searchBooks();
-  }
+  // componentDidMount() {
+  //   this.searchBooks();
+  // }
 
   searchBooks = (query) => {
+    console.log("form submit - ",query);
     API.search(query)
-      .then(res => this.setState({ books: res.data }))
+      .then(res => { 
+         console.log("response",res.data.items);
+          this.setState({ books: res.data.items })
+        // console.log(this.state.books))
+      })
+       
+       
       .catch(err => console.log(err));
+      //console.log(this.state.books));
   };
 
   render() {
@@ -47,26 +65,24 @@ class Books extends Component {
           <form>
               <h1>Book Search</h1>
               <Input name="search" onChange={this.handleInputChange} placeholder="Title (required)" />
-              <FormBtn onChange={this.handleFormSubmit}>Submit Book</FormBtn>
+              <button onClick={this.handleFormSubmit}>Submit Book</button>
             </form>
-            {this.state.books.length ? (
-              <List>
-                {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <a href={"/books/" + book._id}>
-                      <strong>
-                        {book.title} by {book.author}
-                      </strong>
-                    </a>
-                    <DeleteBtn />
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3></h3>
-            )}
-            </Col>
+          </Col>
         </Row>
+        
+        <div>
+          
+           {this.state.books.map(book => (
+             <CardItem  key={book.id} title={book.volumeInfo.title} description={book.volumeInfo.description}/>
+            
+            //console.log("title",book.title)
+
+           
+           
+            ))}
+          
+        </div>
+     
       </Container>
     );
   }
