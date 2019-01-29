@@ -8,20 +8,20 @@ import { List, ListItem } from "../components/List";
 import { Input, FormBtn } from "../components/Form";
 import "../pages/books.css";
 
-class Books extends Component {
+class SavedBooks extends Component {
   state = {
-    books: []
+    savedbooks: []
   };
 
-  componentDidMount() {
-    this.loadBooks();
-  }
+  // componentDidMount() {
+  //   this.loadBooks();
+  // }
 
-  loadBooks = () => {
-    API.getBooks()
-      .then(res => this.setState({ books: res.data }))
-      .catch(err => console.log(err));
-  };
+  // loadBooks = () => {
+  //   API.getBooks()
+  //     .then(res => this.setState({ books: res.data }))
+  //     .catch(err => console.log(err));
+  // };
 
   render() {
     return (
@@ -35,11 +35,11 @@ class Books extends Component {
             
           </Col>
           <Col size="md-12 sm-1">
-          <form>
+          { /* <form>
               <h1>Book Search</h1>
               <Input name="Book Search" placeholder="Title (required)" />
               <FormBtn>Submit Book</FormBtn>
-            </form>
+            </form> */}
             {this.state.books.length ? (
               <List>
                 {this.state.books.map(book => (
@@ -64,4 +64,4 @@ class Books extends Component {
   }
 }
 
-export default Books;
+export default SavedBooks;

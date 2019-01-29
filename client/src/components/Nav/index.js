@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 
 
 function Nav() {
@@ -7,12 +9,19 @@ function Nav() {
    <nav className="navbar navbar-expand-lg navbar-dark bg-warning">
     <div className="container-fluid">
       <div className="navbar-header">
-        <button type="button" className="btn btn-warning">Google Book Search</button>
+      <Link to="/" className={window.location.pathname === "/" ? "nav-link active" : "nav-link"}>
+      <button type="button" className="btn btn-warning">Google Book Search</button>
+        </Link>
+        
       </div>
       <ul className="nav navbar-nav">
         <li className="active"></li>
-        <a href="/Users/omarcharlesgedeon/Desktop/12-Stu_GoogleBooksSearch/client/src/pages/Books.js" className="btn btn-warning" role="button">Search</a>
-        <a href="/Users/omarcharlesgedeon/Desktop/12-Stu_GoogleBooksSearch/client/src/pages/savedBooks.js" className="btn btn-warning" role="button">Saved</a>
+         <Link to="/" className={window.location.pathname === "/" ? "nav-link active" : "nav-link"}>
+        <a className="btn btn-warning" role="button">Search</a>
+         </Link>
+         <Link to="/Saved" className={window.location.pathname === "/saved" ? "nav-link active" : "nav-link"}>
+        <a className="btn btn-warning" role="button">Saved</a>
+         </Link>
       </ul>
     </div>
   </nav>
