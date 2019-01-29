@@ -10,7 +10,9 @@ import "../pages/books.css";
 class Books extends Component {
   state = {
     search: "",
-    books : []
+    books : [],
+    savedBooks : [],
+    saved : false
   };
 
   handleInputChange = event => {
@@ -35,7 +37,16 @@ class Books extends Component {
   // componentDidMount() {
   //   this.searchBooks();
   // }
+  handleSavedBooks = (id) => {
 
+    this.setState({saved:true})
+
+
+
+
+
+
+  }
   searchBooks = (query) => {
     console.log("form submit - ",query);
     API.search(query)
@@ -73,7 +84,7 @@ class Books extends Component {
         <div>
           
            {this.state.books.map(book => (
-             <CardItem  key={book.id} title={book.volumeInfo.title} description={book.volumeInfo.description}/>
+             <CardItem  key={book.id} title={book.volumeInfo.title} description={book.volumeInfo.description} saved={this.state.saved}/>
             
             //console.log("title",book.title)
 
