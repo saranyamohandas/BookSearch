@@ -67,14 +67,15 @@ class Books extends Component {
         <Row>
           <Col size="md-12">
             <Jumbotron>
-              <strong><h1>Google Book Search</h1></strong>
-              <h5>-React Edition-</h5>
+              <strong><h1>Book REACTion</h1></strong>
+              <h2></h2>
+              
             </Jumbotron>
             
           </Col>
           <Col size="md-3 sm-1">
           <form>
-              <h1>Book Search</h1>
+              <h1>Search</h1>
               <Input name="search" onChange={this.handleInputChange} placeholder="Title (required)" />
               <button onClick={this.handleFormSubmit}>Submit Book</button>
             </form>
