@@ -85,7 +85,7 @@ class Books extends Component {
         <div>
           
            {this.state.books.map(book => (
-             <CardItem  key={book.id} title={book.volumeInfo.title} description={book.volumeInfo.description} saved={this.state.saved}/>
+             <CardItem  key={book.id} title={book.volumeInfo.title} description={book.volumeInfo.description} image={book.volumeInfo.imageLinks} saved={this.state.saved}/>
             
             //console.log("title",book.title)
 
