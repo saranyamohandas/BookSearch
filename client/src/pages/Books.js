@@ -4,6 +4,7 @@ import API from "../utils/API";
 import DeleteBtn from "../components/DeleteBtn";
 import { Col, Row, Container } from "../components/Grid";
 import CardItem  from "../components/List";
+import SavedItem  from "../components/List";
 import { Input, FormBtn } from "../components/Form";
 import "../pages/books.css";
 
@@ -13,55 +14,96 @@ class Books extends Component {
     books : [],
     savedBooks : [],
     saved : false
+    
   };
 
   handleInputChange = event => {
-    // console.log(event.target.value)
-    // console.log(this.state.search)
     const name = event.target.name;
     const value = event.target.value;
-    //this.setState({search: event.target.value})
     this.setState({[name]: value});
     console.log(this.state.search)
   }
 
   handleFormSubmit = event => {
     event.preventDefault();
-    //console.log("form submit",this.state.search)
-    //this.setState({search: event.target.value})
     console.log("inside handleformsubmit")
     this.searchBooks(this.state.search);
 
   }
 
-  // componentDidMount() {
-  //   this.searchBooks();
-  // }
-  handleSavedBooks = (id) => {
+  
+  handleSavedBooks = ((id) => {
+    console.log("handle saved books triggered for ",id);
+    //make a shallow copy of this.state.books and set true to saved book
 
-    this.setState({saved:true})
+    const currBooks = [...this.state.books];
+    currBooks.forEach((book) => {
+      if(book.id == id) {
+        console.log("id",id);
+        //console.log(book.saved)
+        book.saved = true;
+        const bookData = {title : book.title,author: "hardcoded"}
+        API.saveBook(bookData).then((res) => {
+          console.log("book posted")
 
+        })
 
+      }
+    });
+    //this.setState({books: currBooks})
+    //const updatedBooks = this.state.books.filter((book)=> book.id !== id)
+    //filter the unsaved books and pass to list component
+    const unsavedBooks = currBooks.filter((book)=> !book.saved)
+    // console.log("updatedBooks",updatedBooks);
+    console.log("unsaved",unsavedBooks)
+     this.setState({books: unsavedBooks})
 
+    })
 
+      // test this
+      
+     // this.setState({books: updatedBooks})
+       //console.log(this.state.books)
+    //    console.log("updatedBooks",updatedBooks);
+    // })
 
+//     console.log("updatedBooks",updatedBooks);
+// })
 
+  saveToDB = (id) => {
+    this.state.books.forEach((book) => {
+      if(id===book.id){
+        const bookData = {title : book.title,author: "hardcoded"}
+        API.saveBook(bookData).then((res) => {
+          console.log("book posted")
+
+        })
+      }
+    })
   }
+
   searchBooks = (query) => {
     console.log("form submit - ",query);
     API.search(query)
       .then(res => { 
          console.log("response",res.data.items);
-          this.setState({ books: res.data.items })
-        // console.log(this.state.books))
-      })
-       
-       
-      .catch(err => console.log(err));
-      //console.log(this.state.books));
+         let books = res.data.items;
+         // books.map((book)=>{
+         //  book.saved = false;
+         // })
+         books.map((book)=>{
+          book.saved = false;
+          })
+
+          //this.setState({ books: res.data.items })
+          this.setState({ books: books })
+        
+      }).catch(err => console.log(err));
+      
   };
 
   render() {
+    //let unsaved = {this.state.books.filter((book) => {return(book.saved)} )}
     return (
       <Container fluid>
         <Row>
@@ -83,14 +125,10 @@ class Books extends Component {
         </Row>
         
         <div>
-          
+          { /* {this.state.books.filter((book) => } */}
            {this.state.books.map(book => (
-             <CardItem  key={book.id} title={book.volumeInfo.title} description={book.volumeInfo.description} saved={this.state.saved}/>
+             <CardItem  key={book.id} id={book.id} title={book.volumeInfo.title} description={book.volumeInfo.description} saved={book.saved} onClick={this.handleSavedBooks}/>
             
-            //console.log("title",book.title)
-
-           
-           
             ))}
           
         </div>
