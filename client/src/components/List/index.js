@@ -33,7 +33,6 @@ class CardItem extends Component {
 		  </div>
 		  <div className="card-body">
 		    <h5 className="card-title">Special title treatment</h5>
-			<p className="card-image">{this.props.imageLinks}</p>
 		    <p className="card-text"><span className="description"> Short description: </span>{this.props.description}</p>
 		    <a href="#" className="btn btn-primary" onClick={()=>this.savebook(this.props.id)}>Save</a>
 		  </div>
