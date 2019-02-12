@@ -43,8 +43,8 @@ fields when searched:
 
 * `link` - The Book's information link as returned from the Google Books API
 
-Below is the link to app -
-- _[Heroku](https://sample-test-deployment.herokuapp.com/) - Click here for heroku published site
+Links -
+- _[Heroku](https://sample-test-deployment.herokuapp.com/) - Click here for heroku deployed site
 
 ### Created by:
 
